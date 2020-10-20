@@ -19,6 +19,7 @@
 <script>
 import Aside from "./Aside";
 import Header from "./Header";
+import { getLoginlog } from "../../api/index";
 export default {
   data() {
     return {
@@ -32,6 +33,13 @@ export default {
     this.$bus.$on("changeWidth2", e => {
       this.width = "200px";
     });
+    // getLoginlog()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   },
   components: {
     Aside,
