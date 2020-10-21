@@ -1,26 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 // import Home from "../pages/Home.vue";
-
+import dynamicRouters from "../router/dynamicRoutes"
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
     component: () =>
-      import(/*  webpackChunkName: "about" */ "../pages/Home/index.vue")
+      import(/* webpackChunkName: "about" */ "../pages/Home/index.vue"),
   },
+
   {
     path: "/login",
     name: "Login",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../pages/Login/index.vue")
+  },
+  {
+    path: '*',
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../pages/Page404/index.vue"),
   }
 ];
+// VueRouter.addRoutes(dynamicRouters)
 
 const router = new VueRouter({
   routes

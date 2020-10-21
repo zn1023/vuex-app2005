@@ -9,3 +9,7 @@ export const Login = (username, password) => axios({
 export const getLoginlog = () => axios({
     url: "/getloginlog"
 })
+
+export const getMenuList = () => axios({
+    url: "/permission/getMenuList"
+})

@@ -11,7 +11,9 @@
           <Header></Header>
         </el-header>
         <!-- 主体样式 -->
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -19,13 +21,14 @@
 <script>
 import Aside from "./Aside";
 import Header from "./Header";
-import { getLoginlog } from "../../api/index";
+import { mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
       width: "200px"
     };
   },
+  
   mounted() {
     this.$bus.$on("changeWidth", e => {
       this.width = "65px";
@@ -33,6 +36,8 @@ export default {
     this.$bus.$on("changeWidth2", e => {
       this.width = "200px";
     });
+    // this.CLEAR_SIDEMENU();
+    this.SET_USERROUTES();
     // getLoginlog()
     //   .then(res => {
     //     console.log(res);
@@ -40,6 +45,10 @@ export default {
     //   .catch(err => {
     //     console.log(err);
     //   });
+  },
+  methods: {
+    ...mapMutations(["CLEAR_SIDEMENU"]),
+    ...mapActions(["SET_USERROUTES"])
   },
   components: {
     Aside,
@@ -57,7 +66,7 @@ export default {
 }
 
 .el-aside {
-  background-color: #d3dce6;
+  background-color: rgb(46, 46, 231);
   color: #333;
   text-align: center;
   line-height: 200px;

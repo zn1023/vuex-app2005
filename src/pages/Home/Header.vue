@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-bg" justify="space-between">
       <el-col :span="6">
         <div class="grid-content bg-purple" @click="cli">
-          <i class="el-icon-s-fold"></i>
+          <span :class="[class1, class2]"></span>
         </div>
       </el-col>
       <el-col :span="6"
@@ -26,11 +26,29 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      circleUrl:
+        "https://img.zcool.cn/community/019e0f5c19f9eea8012029ac06ac52.jpg@1280w_1l_2o_100sh.jpg",
+      size: "large",
+      flag: true,
+      class1: "iconfont",
+      class2: "icon-shouqi",
+      class3: ""
+    };
+  },
   computed: {
     ...mapState(["userInfo"])
   },
   methods: {
     cli() {
+      this.flag = !this.flag;
+      if (!this.flag) {
+        this.class2 = "icon-zhankai";
+      } else {
+        this.class2 = "icon-shouqi";
+      }
+
       this.$bus.$emit("change");
     },
     del() {
@@ -41,14 +59,29 @@ export default {
   }
 };
 </script>
-<style>
-.el-icon-s-fold{}
+<style >
+.header .el-row--flex.is-justify-space-between {
+  background-color: rgb(76, 76, 243);
+  height: 80px;
+}
+.el-header {
+  padding: 0px;
+  text-align: left !important;
+}
+
 .el-avatar {
   vertical-align: middle;
 }
-span {
+.span {
   margin: 0 16px 0 6px;
   vertical-align: middle;
+  color: white;
+}
+
+.iconfont {
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
 }
 .del {
   cursor: pointer;
@@ -65,10 +98,14 @@ span {
   background: #99a9bf;
 }
 .bg-purple {
-  background: #d3dce6;
+  background: rgb(76, 76, 243);
+  margin-left: 40px;
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  background-color: rgb(76, 76, 243);
+  margin-left: 40px;
+  font-size: 24px;
+  color: white;
 }
 .grid-content {
   border-radius: 4px;

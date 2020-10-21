@@ -1,14 +1,9 @@
 <template>
   <div class="aside">
-    <el-menu
-      v-model="isCollapse"
-      style="margin-bottom: 20px;"
-      default-active="1-4-1"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      :collapse="isCollapse"
-    >
+    <h1>
+      <img src="../../assets/img/qflogo.png" alt="" />
+    </h1>
+    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
       <el-menu-item index="1">
         <i class="el-icon-menu"></i>
         <span slot="title">管理首页</span>
@@ -20,56 +15,62 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学员项目管理</el-menu-item>
-          <el-menu-item index="1-2">学员资料</el-menu-item>
-          <el-menu-item index="1-3">学员宿舍</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-menu"></i>
         <span slot="title">考勤管理</span>
       </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-document"></i>
-        <span slot="title">数据统计</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <span slot="title">我的中心</span>
-      </el-menu-item>
     </el-menu>
   </div>
 </template>
 <script>
+
 export default {
   data() {
     return {
       isCollapse: false,
     };
   },
+ 
   mounted() {
     this.$bus.$on("change", e => {
       this.isCollapse = !this.isCollapse;
-      console.log(this.isCollapse);
-      if(this.isCollapse){
-          this.$bus.$emit("changeWidth");
-      }else{
-          this.$bus.$emit("changeWidth2");
+      // console.log(this.isCollapse);
+      if (this.isCollapse) {
+        this.$bus.$emit("changeWidth");
+      } else {
+        this.$bus.$emit("changeWidth2");
       }
     });
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     }
   }
 };
 </script>
 <style>
+.aside h1 {
+  position: relative;
+  width: 200px;
+  height: 80px;
+}
+.aside img {
+  position: absolute;
+  left: -45px;
+  top: 0px;
+  height: 80px;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.el-menu-item {
+  color: black !important;
 }
 </style>

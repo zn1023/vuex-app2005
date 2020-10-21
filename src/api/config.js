@@ -28,6 +28,7 @@ axios.interceptors.request.use(function (config) {
 })
 
 // 响应拦截
+// 个人觉得是一种localStorage里的值被修改，还有就是长时间不用token失效
 axios.interceptors.response.use(function (config) {
     // console.log(config);
     // 放行，若没有页面一直加载

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <video
-      src="../../assets/a7549fa881248c1d27116f46d83a826d.mp4"
+      src="../../assets/video/a7549fa881248c1d27116f46d83a826d.mp4"
       autoplay="autoplay"
       loop
       preload="auto"
@@ -27,11 +27,12 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <el-form-item label="密码" prop="password" >
           <el-input
             type="password"
             v-model="loginFrom.password"
             autocomplete="off"
+            @keydown.enter.native="submitForm('loginFrom')"
           ></el-input>
         </el-form-item>
 
@@ -72,7 +73,7 @@ export default {
         if (uPattern.test(value)) {
           callback();
         } else {
-          callback(new Error("用户名为4至16为的字母或数字组成"));
+          callback(new Error("用户名为1至16为的字母或数字组成"));
         }
       }
     };

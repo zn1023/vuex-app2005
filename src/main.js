@@ -2,12 +2,14 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
+// 引入element-ui
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
-
+// 引入全局css和element-rest
 import "@/assets/style/base.css";
 import "@/assets/style/el-reset.css";
+// 引入iconfont
+import "./assets/iconfont/iconfont.css"
 
 // 按需引入
 // import { Carousel,CarouselItem } from 'element-ui';
@@ -32,6 +34,8 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/login") {
       next();
     } else {
+      // 此处不需要使用this.$router.push(),因为next()函数可以直接写参数，参数为对象形式，显示未登录前想要访问
+      // 其他页面全部都会跳转到参数对应的那个路径上面去
       next({ path: "/login" });
     }
   }
