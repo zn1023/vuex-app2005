@@ -12,6 +12,16 @@
         </el-header>
         <!-- 主体样式 -->
         <el-main>
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item :to="{ path: '/Welcome' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item
+              :to="{ path: crumbs.path }"
+              v-for="item in crumbs"
+              :key="item.meta.fullPath"
+              >{{ item.meta.name }}</el-breadcrumb-item
+            >
+          </el-breadcrumb>
+          <hr />
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -21,14 +31,16 @@
 <script>
 import Aside from "./Aside";
 import Header from "./Header";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
       width: "200px"
     };
   },
-  
+  computed: {
+    ...mapState(["crumbs"])
+  },
   mounted() {
     this.$bus.$on("changeWidth", e => {
       this.width = "65px";
@@ -37,7 +49,6 @@ export default {
       this.width = "200px";
     });
     // this.CLEAR_SIDEMENU();
-    this.SET_USERROUTES();
     // getLoginlog()
     //   .then(res => {
     //     console.log(res);
@@ -64,7 +75,10 @@ export default {
   text-align: center;
   line-height: 60px;
 }
-
+.el-breadcrumb {
+  margin: 20px 0;
+  font-size: 16px;
+}
 .el-aside {
   background-color: rgb(46, 46, 231);
   color: #333;

@@ -16,7 +16,8 @@ let userInfo = JSON.parse(localStorage.getItem("app_userInfo")) || {};
 export default new Vuex.Store({
   state: {
     userInfo,
-    users:[]
+    users: [],
+    crumbs: []
   },
   mutations: {
     // 获取userInfo数据
@@ -26,32 +27,30 @@ export default new Vuex.Store({
     },
     GET_USERROUTES(state, payload) {
       state.users = payload;
-      let target = dynamicRouters["children"];
-      for (let i in state.users) {
-        target.push(state.users[i]);
-      }
+      let target = dynamicRouters.find(item => item.path === "/")
+      // for (let i in state.users) {
+      //   target.children.push(state.users[i]);
+      // }
+      target.children = state.users;
+
+      // console.log(target.children);
       // console.log(dynamicRouters);
       // console.log(state.users);
-      // router.addRoutes(dynamicRouters);
+      router.addRoutes(dynamicRouters);
       // router.push({ path: '/' })
     },
-    CLEAR_SIDEMENU(state) {
-      state.users = []
+    // 设置面包屑
+    SET_CRUMBS(state, payload) {
+      state.crumbs = payload;
     }
   },
   actions: {
-    SET_USERROUTES({ commit }) {
-      getMenuList()
-        .then(res => {
-          // 获取用户权限菜单成功
-          // console.log(res.data);
-          let result = recursionRoutes(allRouters, res.data.menuList);
-          // console.log(result);
-          commit("GET_USERROUTES", result);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    async SET_USERROUTES({ commit }) {
+      let userMenu = await getMenuList()
+      let result = recursionRoutes(allRouters, userMenu.data.menuList);
+      // console.log(result);
+      commit("GET_USERROUTES", result);
+
     },
 
   },

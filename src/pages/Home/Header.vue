@@ -55,6 +55,7 @@ export default {
       localStorage.removeItem("app_token");
       localStorage.removeItem("app_userInfo");
       this.$router.push("/login");
+      window.location.reload();
     }
   }
 };

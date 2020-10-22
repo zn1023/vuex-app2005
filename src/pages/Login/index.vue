@@ -135,7 +135,7 @@ export default {
                   message: "恭喜你，登入成功",
                   type: "success"
                 });
-                this.$router.push("/");
+                this.$router.push("/Welcome");
                 this.SET_USERINFO(res.data.userInfo);
               } else {
                 // 输入信息错误

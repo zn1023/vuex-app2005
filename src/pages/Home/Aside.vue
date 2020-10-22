@@ -3,36 +3,27 @@
     <h1>
       <img src="../../assets/img/qflogo.png" alt="" />
     </h1>
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
-      <el-menu-item index="1">
-        <i class="el-icon-menu"></i>
-        <span slot="title">管理首页</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">学员管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">学员项目管理</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item index="3">
-        <i class="el-icon-menu"></i>
-        <span slot="title">考勤管理</span>
-      </el-menu-item>
+    <el-menu
+      :default-active="$route.path"
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      :router="true"
+    >
+      <qf-sub-menu :sideMenu="users"></qf-sub-menu>
     </el-menu>
   </div>
 </template>
 <script>
-
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      isCollapse: false,
+      isCollapse: false
     };
   },
- 
+  computed: {
+    ...mapState(["users"])
+  },
   mounted() {
     this.$bus.$on("change", e => {
       this.isCollapse = !this.isCollapse;
@@ -44,14 +35,7 @@ export default {
       }
     });
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      // console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      // console.log(key, keyPath);
-    }
-  }
+  methods: {}
 };
 </script>
 <style>
@@ -69,8 +53,5 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
-}
-.el-menu-item {
-  color: black !important;
 }
 </style>
